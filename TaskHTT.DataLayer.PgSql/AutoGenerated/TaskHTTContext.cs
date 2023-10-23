@@ -16,6 +16,10 @@ namespace TaskHTT.DataLayer.PgSql
         {
         }
 
+        public virtual DbSet<EnumCategory> EnumCategories { get; set; } = null!;
+        public virtual DbSet<EnumProduct> EnumProducts { get; set; } = null!;
+        public virtual DbSet<EnumState> EnumStates { get; set; } = null!;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -27,6 +31,41 @@ namespace TaskHTT.DataLayer.PgSql
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<EnumCategory>(entity =>
+            {
+                entity.Property(e => e.CreatedDate).HasDefaultValueSql("now()");
+
+                entity.HasOne(d => d.State)
+                    .WithMany(p => p.EnumCategories)
+                    .HasForeignKey(d => d.StateId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_state_id");
+            });
+
+            modelBuilder.Entity<EnumProduct>(entity =>
+            {
+                entity.Property(e => e.CreatedDate).HasDefaultValueSql("now()");
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.EnumProducts)
+                    .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_category_id");
+
+                entity.HasOne(d => d.State)
+                    .WithMany(p => p.EnumProducts)
+                    .HasForeignKey(d => d.StateId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_state_id");
+            });
+
+            modelBuilder.Entity<EnumState>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedDate).HasDefaultValueSql("now()");
+            });
+
             OnModelCreatingPartial(modelBuilder);
         }
 
