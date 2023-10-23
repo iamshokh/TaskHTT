@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="ProductService\Concrete\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TaskHTT.DataLayer\TaskHTT.DataLayer.csproj" />
+  </ItemGroup>
+
 </Project>

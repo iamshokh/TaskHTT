@@ -1,7 +1,16 @@
+using TaskHTT.UI;
+using TaskHTT.UI.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
+
+AppSettings.Init(builder.Configuration.Get<AppSettings>());
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.ConfigureDbServices();
+builder.Services.ConfigureServices();
+builder.Services.ConfigureConfigs();
 
 var app = builder.Build();
 
