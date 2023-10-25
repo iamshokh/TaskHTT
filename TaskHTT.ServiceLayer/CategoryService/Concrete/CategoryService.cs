@@ -64,6 +64,18 @@ namespace TaskHTT.ServiceLayer.CategoryService
             else return null;
         }
 
+        public UpdateCategoryDto GetById(int id)
+        {
+            var category = _context.Categories.FirstOrDefault(c => c.Id == id);
+            var result = new UpdateCategoryDto
+            {
+                Id = category.Id,
+                CategoryName = category.CategoryName,
+                Title = category.Title,
+            };
+            return result;
+        }
+
         public List<Category> GetList()
         {
             var categories = _context.Categories.ToList();
@@ -76,7 +88,7 @@ namespace TaskHTT.ServiceLayer.CategoryService
             return categories.ToList();
         }
 
-        public bool Update(CategoryDto dto)
+        public bool Update(UpdateCategoryDto dto)
         {
             try
             {

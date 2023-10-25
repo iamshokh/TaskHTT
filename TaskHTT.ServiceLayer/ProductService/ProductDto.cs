@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace TaskHTT.ServiceLayer.ProductService
 {
-    internal class ProductDto
+    public class ProductDto
     {
+        public string ProductName { get; set; } 
+        public string Title { get; set; }
+        public int CategoryId { get; set; }
     }
 }

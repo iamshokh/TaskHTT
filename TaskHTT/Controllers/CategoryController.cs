@@ -47,8 +47,14 @@ namespace TaskHTT.UI.Controllers
             return View(dto);
         }
 
+        public IActionResult Update(int id)
+        {
+            var record = _service.GetById(id);
+            return View(record);
+        }
+
         [HttpPost]
-        public IActionResult Update(CategoryDto dto)
+        public IActionResult Update(UpdateCategoryDto dto)
         {
             if (!ModelState.IsValid)
             {
