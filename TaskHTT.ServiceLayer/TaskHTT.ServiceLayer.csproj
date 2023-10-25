@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TaskHTT.Core\TaskHTT.Core.csproj" />
     <ProjectReference Include="..\TaskHTT.DataLayer\TaskHTT.DataLayer.csproj" />
   </ItemGroup>
 

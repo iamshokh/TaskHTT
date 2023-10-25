@@ -10,9 +10,11 @@ namespace TaskHTT.ServiceLayer.CategoryService
     public interface ICategoryService
     {
         List<Category> GetList();
-        void Create(CategoryDto dto);
-        void Update(CategoryDto dto);
-        void Delete(int id);
+        bool Create(CategoryDto dto);
+        bool Update(CategoryDto dto);
+        bool Delete(int id);
+        List<Product> GetByCategoryId(int id);
 
+        List<Category> Search(string search);
     }
 }

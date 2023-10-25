@@ -8,5 +8,7 @@ namespace TaskHTT.ServiceLayer.CategoryService
 {
     public class CategoryDto
     {
+        public string CategoryName { get; set; }
+        public string Title { get; set; }
     }
 }

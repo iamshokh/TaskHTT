@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskHTT.Core;
 using TaskHTT.DataLayer.EfClasses;
 using TaskHTT.DataLayer.EfCode;
 
@@ -16,26 +17,51 @@ namespace TaskHTT.ServiceLayer.CategoryService
             _context = context;
         }
 
-        public void Create(CategoryDto dto)
+        public bool Create(CategoryDto dto)
         {
-            var newCategory = new Category
+            try
             {
-                //CategoryName = cate
-            };
-            _context.Categories.Add(newCategory);
-            _context.SaveChanges();
+                var newCategory = new Category
+                {
+                    CategoryName = dto.CategoryName,
+                    Title = dto.Title,
+                    StateId = StateIdConst.ACTIVE
+                };
+                _context.Categories.Add(newCategory);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
-            var category = _context.Categories.FirstOrDefault(c => c.Id == id);
-            if(category != null)
+            try
             {
-                _context.Categories.Remove(category);
+                var category = _context.Categories.FirstOrDefault(c => c.Id == id);
+                if (category == null)
+                    return false;
+
+                category.StateId = StateIdConst.PASSIVE;
+                _context.Categories.Update(category);
                 _context.SaveChanges();
+                return true;
             }
-            else
-                throw new Exception("Категория не найдена");
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public List<Product> GetByCategoryId(int id)
+        {
+            var products = _context.Products.Where(p => p.Id == id);
+            if (products != null)
+                return products.ToList();
+            else return null;
         }
 
         public List<Category> GetList()
@@ -44,14 +70,31 @@ namespace TaskHTT.ServiceLayer.CategoryService
             return categories;
         }
 
-        public void Update(CategoryDto dto)
+        public List<Category> Search(string search)
         {
-            var updateCategory = new Category
+            var categories = _context.Categories.Where(p => p.CategoryName.ToLower().Contains(search.ToLower()));
+            return categories.ToList();
+        }
+
+        public bool Update(CategoryDto dto)
+        {
+            try
             {
-                ///
-            };
-            _context.Update(updateCategory);
-            _context.SaveChanges();
+                var updateCategory = new Category
+                {
+                    CategoryName = dto.CategoryName,
+                    Title = dto.Title,
+                    StateId = StateIdConst.ACTIVE
+                };
+                _context.Update(updateCategory);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
     }
 }

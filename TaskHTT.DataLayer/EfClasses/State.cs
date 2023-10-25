@@ -28,10 +28,9 @@ namespace TaskHTT.DataLayer.EfClasses
         public string FullName { get; set; } = null!;
         [Column("created_date", TypeName = "timestamp without time zone")]
         public DateTime CreatedDate { get; set; }
-
-        [InverseProperty("State")]
+        [InverseProperty(nameof(Category.State))]
         public virtual ICollection<Category> Categories { get; set; }
-        [InverseProperty("State")]
+        [InverseProperty(nameof(Product.State))]
         public virtual ICollection<Product> Products { get; set; }
     }
 }
