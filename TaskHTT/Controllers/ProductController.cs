@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using TaskHTT.DataLayer.EfClasses;
 using TaskHTT.ServiceLayer.CategoryService;
 using TaskHTT.ServiceLayer.ProductService;
 
@@ -21,12 +22,15 @@ namespace TaskHTT.UI.Controllers
 
         //public IActionResult Create()
         //{
-
+        //    var dto = new ProductDto();
+        //    dto.CategoryList = _categoryService.GetList().Select(a => new SelectListItem { Text = a.CategoryName, Value = a.Id.ToString(), Selected = a.Id == dto.CategoryId }).ToList();
+        //    return View(dto);
         //}
 
         public IActionResult Create(ProductDto dto)
         {
-            if(!ModelState.IsValid)
+            dto.CategoryList= _categoryService.GetList().Select(a => new SelectListItem { Text = a.CategoryName, Value = a.Id.ToString(), Selected = a.Id == dto.CategoryId}).ToList();
+            if (!ModelState.IsValid)
             {
                 return View(dto);
             }
@@ -34,20 +38,23 @@ namespace TaskHTT.UI.Controllers
             if (result)
             {
                 TempData["msg"] = "Created Successfully";
-                return RedirectToAction(nameof(Create));
+                return RedirectToAction(nameof(GetList));
             }
             TempData["msg"] = "Error has occured on server side";
             return View(dto);
         }
 
-        //public IActionResult Update(int id)
-        //{
-
-        //}
+        public IActionResult Update(int id)
+        {
+            var record = _productService.GetById(id);
+            record.CategoryList = _categoryService.GetList().Select(a => new SelectListItem { Text = a.CategoryName, Value = a.Id.ToString(), Selected = a.Id == record.CategoryId }).ToList();
+            return View(record);
+        }
 
         [HttpPost]
-        public IActionResult Update(ProductDto dto)
+        public IActionResult Update(UpdateProductDto dto)
         {
+            dto.CategoryList = _categoryService.GetList().Select(a => new SelectListItem { Text = a.CategoryName, Value = a.Id.ToString(), Selected = a.Id == dto.CategoryId }).ToList();
             if (!ModelState.IsValid)
             {
                 return View(dto);

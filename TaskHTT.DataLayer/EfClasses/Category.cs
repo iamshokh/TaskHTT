@@ -25,7 +25,7 @@ namespace TaskHTT.DataLayer.EfClasses
         [Column("state_id")]
         public int StateId { get; set; }
         [Column("created_date", TypeName = "timestamp without time zone")]
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         [ForeignKey(nameof(StateId))]
         public virtual State State { get; set; } = null!;

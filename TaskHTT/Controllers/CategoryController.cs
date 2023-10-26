@@ -20,9 +20,14 @@ namespace TaskHTT.UI.Controllers
 
         public IActionResult Delete(int id)
         {
-
-            _service.Delete(id);
-            return RedirectToAction("GetAll");
+            var result = _service.Delete(id);
+            if(result)
+            {
+                TempData["msg"] = "Created Successfully";
+                return RedirectToAction("GetList");
+            }
+            TempData["msg"] = "Error has occured on server side";
+            return RedirectToAction("GetList");
         }
 
         public IActionResult Create()

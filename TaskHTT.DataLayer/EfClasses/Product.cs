@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace TaskHTT.DataLayer.EfClasses
 {
@@ -22,11 +21,14 @@ namespace TaskHTT.DataLayer.EfClasses
         [Column("state_id")]
         public int StateId { get; set; }
         [Column("created_date", TypeName = "timestamp without time zone")]
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         [ForeignKey(nameof(CategoryId))]
         public virtual Category Category { get; set; } = null!;
         [ForeignKey(nameof(StateId))]
         public virtual State State { get; set; } = null!;
+
+        //[NotMapped]
+        //public List<SelectListItem>? CategoryList { get; set; }
     }
 }

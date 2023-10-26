@@ -56,14 +56,6 @@ namespace TaskHTT.ServiceLayer.CategoryService
             }
         }
 
-        public List<Product> GetByCategoryId(int id)
-        {
-            var products = _context.Products.Where(p => p.Id == id);
-            if (products != null)
-                return products.ToList();
-            else return null;
-        }
-
         public UpdateCategoryDto GetById(int id)
         {
             var category = _context.Categories.FirstOrDefault(c => c.Id == id);
@@ -78,13 +70,13 @@ namespace TaskHTT.ServiceLayer.CategoryService
 
         public List<Category> GetList()
         {
-            var categories = _context.Categories.ToList();
+            var categories = _context.Categories.Where(c => c.StateId == StateIdConst.ACTIVE).ToList();
             return categories;
         }
 
         public List<Category> Search(string search)
         {
-            var categories = _context.Categories.Where(p => p.CategoryName.ToLower().Contains(search.ToLower()));
+            var categories = _context.Categories.Where(p => p.CategoryName.ToLower().Contains(search.ToLower()) && p.StateId == StateIdConst.ACTIVE);
             return categories.ToList();
         }
 
@@ -94,6 +86,7 @@ namespace TaskHTT.ServiceLayer.CategoryService
             {
                 var updateCategory = new Category
                 {
+                    Id = dto.Id,
                     CategoryName = dto.CategoryName,
                     Title = dto.Title,
                     StateId = StateIdConst.ACTIVE

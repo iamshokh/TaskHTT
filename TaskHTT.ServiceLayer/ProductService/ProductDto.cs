@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TaskHTT.ServiceLayer.ProductService
 {
@@ -11,5 +8,9 @@ namespace TaskHTT.ServiceLayer.ProductService
         public string ProductName { get; set; } 
         public string Title { get; set; }
         public int CategoryId { get; set; }
+
+
+        [NotMapped]
+        public List<SelectListItem>? CategoryList { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,20 @@ namespace TaskHTT.ServiceLayer.ProductService
         {
             _context = context;
         }
+
+        public UpdateProductDto GetById(int id)
+        {
+            var product = _context.Products.Include(p => p.Category).FirstOrDefault(c => c.Id == id);
+            var result = new UpdateProductDto
+            {
+                Id = product.Id,
+                ProductName = product.ProductName,
+                Title = product.Title,
+                CategoryId = product.Category.Id,
+            };
+            return result;
+        }
+
         public bool Create(ProductDto dto)
         {
             try
@@ -58,16 +73,17 @@ namespace TaskHTT.ServiceLayer.ProductService
 
         public List<Product> GetList()
         {
-            var products = _context.Products.ToList();
+            var products = _context.Products.Include(a => a.Category).Where(a => a.StateId == StateIdConst.ACTIVE).ToList();
             return products;
         }
 
-        public bool Update(ProductDto dto)
+        public bool Update(UpdateProductDto dto)
         {
             try
             {
                 var updateProduct = new Product
                 {
+                    Id = dto.Id,
                     ProductName = dto.ProductName,
                     Title = dto.Title,
                     CategoryId = dto.CategoryId,

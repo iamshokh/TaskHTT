@@ -14,8 +14,6 @@ namespace TaskHTT.ServiceLayer.CategoryService
         bool Create(CategoryDto dto);
         bool Update(UpdateCategoryDto dto);
         bool Delete(int id);
-        List<Product> GetByCategoryId(int id);
-
         List<Category> Search(string search);
     }
 }

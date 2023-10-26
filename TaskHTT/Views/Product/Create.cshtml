@@ -1,4 +1,4 @@
-﻿@model TaskHTT.DataLayer.EfClasses.Product
+﻿@model TaskHTT.ServiceLayer.ProductService.ProductDto
 @{
 }
 
@@ -19,13 +19,13 @@
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
 
-                @*<div class="form-group">
-                    <label asp-for="CategoryId">Genre *</label>
-                    <select asp-for="CategoryId" asp-items="Model.GenreList" class="form-control">
+                <div class="form-group">
+                    <label asp-for="CategoryId">Category *</label>
+                    <select asp-for="CategoryId" asp-items="Model.CategoryList" class="form-control">
                         <option value="">--select--</option>
                     </select>
-                    <span asp-validation-for="GenreId" class="text-danger"></span>
-                </div>*@
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
 
                 @if (TempData["msg"] != null)
                 {
