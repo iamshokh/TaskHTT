@@ -1,5 +1,5 @@
-using TaskHTT.UI;
-using TaskHTT.UI.Extensions;
+using TaskHTT.Web;
+using TaskHTT.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

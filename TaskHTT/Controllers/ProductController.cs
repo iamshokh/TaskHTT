@@ -4,7 +4,7 @@ using TaskHTT.DataLayer.EfClasses;
 using TaskHTT.ServiceLayer.CategoryService;
 using TaskHTT.ServiceLayer.ProductService;
 
-namespace TaskHTT.UI.Controllers
+namespace TaskHTT.Web.Controllers
 {
     public class ProductController : Controller
     {
@@ -29,7 +29,7 @@ namespace TaskHTT.UI.Controllers
 
         public IActionResult Create(ProductDto dto)
         {
-            dto.CategoryList= _categoryService.GetList().Select(a => new SelectListItem { Text = a.CategoryName, Value = a.Id.ToString(), Selected = a.Id == dto.CategoryId}).ToList();
+            dto.CategoryList = _categoryService.GetList().Select(a => new SelectListItem { Text = a.CategoryName, Value = a.Id.ToString(), Selected = a.Id == dto.CategoryId }).ToList();
             if (!ModelState.IsValid)
             {
                 return View(dto);

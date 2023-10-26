@@ -2,7 +2,7 @@
 using TaskHTT.DataLayer.EfClasses;
 using TaskHTT.ServiceLayer.CategoryService;
 
-namespace TaskHTT.UI.Controllers
+namespace TaskHTT.Web.Controllers
 {
     public class CategoryController : Controller
     {
@@ -21,7 +21,7 @@ namespace TaskHTT.UI.Controllers
         public IActionResult Delete(int id)
         {
             var result = _service.Delete(id);
-            if(result)
+            if (result)
             {
                 TempData["msg"] = "Created Successfully";
                 return RedirectToAction("GetList");

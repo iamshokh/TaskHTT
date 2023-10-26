@@ -1,7 +1,7 @@
 ﻿using TaskHTT.ServiceLayer.CategoryService;
 using TaskHTT.ServiceLayer.ProductService;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace TaskHTT.Web.Extensions
 {
     public static class ServiceExtensions
     {

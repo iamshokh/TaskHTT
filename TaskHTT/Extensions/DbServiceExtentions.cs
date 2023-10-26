@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TaskHTT.DataLayer.EfCode;
 using TaskHTT.DataLayer.PgSql.EfCode;
+using TaskHTT.Web;
 
-namespace TaskHTT.UI.Extensions
+namespace TaskHTT.Web.Extensions
 {
     public static class DbServiceExtentions
     {

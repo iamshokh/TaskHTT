@@ -3,7 +3,7 @@ using System.Diagnostics;
 using TaskHTT.Models;
 using TaskHTT.ServiceLayer.CategoryService;
 
-namespace TaskHTT.Controllers
+namespace TaskHTT.Web.Controllers
 {
     public class HomeController : Controller
     {

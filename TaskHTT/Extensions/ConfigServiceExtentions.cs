@@ -1,4 +1,4 @@
-﻿namespace TaskHTT.UI.Extensions
+﻿namespace TaskHTT.Web.Extensions
 {
     public static class ConfigServiceExtentions
     {

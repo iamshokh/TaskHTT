@@ -1,6 +1,6 @@
 ﻿using TaskHTT.Core.Configurations;
 
-namespace TaskHTT.UI
+namespace TaskHTT.Web
 {
     public class AppSettings
     {
