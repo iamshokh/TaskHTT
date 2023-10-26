@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using TaskHTT.Models;
-using TaskHTT.ServiceLayer.CategoryService;
+using TaskHTT.Web.Models;
 
 namespace TaskHTT.Web.Controllers
 {
